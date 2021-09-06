@@ -67,7 +67,7 @@ while (FE < maxFE):
         partner_idx = random.sample(set(range(0,ecoSize))-set([index]),1)
         partner = ecosystem[partner_idx,:]
 
-        ecoNew1 = organism + np.multiply((np.random.uniform(size=[1,nvar])*2-1),(best_organism-partner))
+        ecoNew1 = ecosystem[index,:] + np.multiply((np.random.uniform(size=[1,nvar])*2-1),(best_organism-partner))
         ecoNew1 = np.clip(ecoNew1, lb, ub)[0]
 
         fitnessNew1 = objFun(ecoNew1)
@@ -82,7 +82,7 @@ while (FE < maxFE):
         partner_idx = random.sample(set(range(0,ecoSize))-set([index]),1)
         partner = ecosystem[partner_idx,:]
 
-        parasite = organism
+        parasite = ecosystem[index,:]
         parasite_dim = random.sample(list(range(0,nvar)),max(int(np.random.uniform(0,nvar)),1))
         parasite[parasite_dim] = np.random.uniform(lb[parasite_dim],ub[parasite_dim], len(parasite_dim))
         fitnessParasite = objFun(parasite)
