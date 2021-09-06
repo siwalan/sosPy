@@ -60,10 +60,7 @@ while (FE < maxFE):
         if fitnessNew2 < fitness[partner_idx]:
             fitness[partner_idx] = fitnessNew2
             ecosystem[partner_idx,:] = ecoNew2
-
-        if (False == (fitness == (np.apply_along_axis(objFun, axis=1, arr=ecosystem)))).any():
-            print("Error!")
-
+            
         FE = FE + 2
 
         ## Commensialism Phase
@@ -79,32 +76,21 @@ while (FE < maxFE):
             fitness[index] = fitnessNew1
             ecosystem[index,:] = ecoNew1
         
-        if (False == (fitness == (np.apply_along_axis(objFun, axis=1, arr=ecosystem)))).any():
-            print("Error!")
-
-
         FE = FE + 1
 
         ## Parasitsm Phase
         partner_idx = random.sample(set(range(0,ecoSize))-set([index]),1)
         partner = ecosystem[partner_idx,:]
-        if (False == (fitness == (np.apply_along_axis(objFun, axis=1, arr=ecosystem)))).any():
-            print("Error!")
 
         parasite = ecosystem[index,:].copy()
         parasite_dim = random.sample(list(range(0,nvar)),max(int(np.random.uniform(0,nvar)),1))
         parasite[parasite_dim] = np.random.uniform(lb[parasite_dim],ub[parasite_dim], len(parasite_dim))
         fitnessParasite = objFun(parasite)
-        if (False == (fitness == (np.apply_along_axis(objFun, axis=1, arr=ecosystem)))).any():
-            print("Error!")
 
         if fitnessParasite < fitness[partner_idx]:
             fitness[partner_idx] = fitnessParasite
             ecosystem[partner_idx,:] = parasite
         
-        if (False == (fitness == (np.apply_along_axis(objFun, axis=1, arr=ecosystem)))).any():
-            print("Error!")
-
         FE = FE + 1 
 
 best_fitness, best_fitness_id = np.amin(fitness), np.argmin(fitness)
