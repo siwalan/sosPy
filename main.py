@@ -1,4 +1,4 @@
-#### SOSpy
+#### sosPy
 ### Based on the Journal Articles and Code by
 ##
 ## Min-Yuan Cheng, Doddy Prayogo,         
